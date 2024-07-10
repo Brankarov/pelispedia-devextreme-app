@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../../services/movie.service';
 import { Movie } from '../../models/Movie';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-list',
@@ -11,7 +12,7 @@ export class MovieListComponent implements OnInit {
 
   movies: Movie[] = [];
 
-  constructor(private service: MovieService){}
+  constructor(private service: MovieService, private router: Router){}
 
   ngOnInit(): void {
     console.log("fetching");
@@ -27,6 +28,10 @@ export class MovieListComponent implements OnInit {
         console.error('Error fetching movies', error)
       }
     )
+  }
+
+  editMovie(data: any){
+    this.router.navigate(['/edit-movie', data.id]);
   }
 
 }

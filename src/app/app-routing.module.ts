@@ -7,8 +7,14 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
 import { DxDataGridModule, DxFormModule } from 'devextreme-angular';
 import { MovieListComponent } from './pages/movie-list/movie-list.component';
+import { MoviesComponent } from './pages/movies/movies.component';
 
 const routes: Routes = [
+  {
+    path: 'pages/movies',
+    component: MoviesComponent,
+    canActivate: [ AuthGuardService ]
+  },
   {
     path: 'pages/movie-list',
     component: MovieListComponent,
@@ -63,7 +69,8 @@ const routes: Routes = [
     HomeComponent,
     ProfileComponent,
     TasksComponent,
-    MovieListComponent
+    MovieListComponent,
+    MoviesComponent
   ]
 })
 export class AppRoutingModule { }

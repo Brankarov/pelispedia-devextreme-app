@@ -19,8 +19,18 @@ export const navigation = [
     ]
   },
   {
-    text: 'Movie List',
-    path: '/pages/movie-list',
-    icon: 'video'
-  }
+    text: 'Movies',
+    icon: 'video',
+    items:[
+      {
+        text: 'Movies Lists',
+        path: '/pages/movie-list'
+      },
+      {
+        text: 'Movies',
+        path: '/pages/movies'
+      }
+    ]
+  },
+ 
 ];

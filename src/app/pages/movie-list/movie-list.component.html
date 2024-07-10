@@ -7,6 +7,11 @@
         <dxi-column dataField="sinopsis" [width]="250"></dxi-column>
         <dxi-column dataField="idDirector"></dxi-column>
         <dxi-column dataField="idGenero"></dxi-column>
-        <dxi-column dataField="idGenero"></dxi-column>
+        <dxi-column [width]="100">
+            <ng-template dxTemplate="cell" let-data>
+                <dxi-button text="Editar" type="normal" stylingMode="contained" (onClick)="editMovie(data)"></dxi-button>
+            </ng-template>
+        </dxi-column>
+        <!-- <dxo-editing mode="popup" [allowUpdating]="true"></dxo-editing> -->
     </dx-data-grid>    
 </div>

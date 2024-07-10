@@ -1,0 +1,16 @@
+<dx-form id="form"
+    [formData]="movies"
+    [colCount]="2"
+    style="margin-top: auto; margin-left: auto; margin-left: auto;">
+    <dxi-item itemType="group" caption="Information">
+        <dxi-item dataField="titulo"></dxi-item>
+        <dxi-item dataField="estreno"></dxi-item>
+        <dxi-item dataField="valoracion"></dxi-item>
+        <dxi-item dataField="idDirector"></dxi-item>
+        <dxi-item dataField="idGenero"></dxi-item>
+    </dxi-item>
+    <dxi-item itemType="group" caption="Sinopsis">
+        <dxi-item dataField="sinopsis"></dxi-item>
+        <dxi-item itemtype="button"></dxi-item>
+    </dxi-item>
+</dx-form>
