@@ -14,8 +14,8 @@ export class MovieListComponent implements OnInit {
   constructor(private service: MovieService){}
 
   ngOnInit(): void {
+    console.log("fetching");
     this.loadMovies();
-    console.log("init");
   }
 
   loadMovies(): void {

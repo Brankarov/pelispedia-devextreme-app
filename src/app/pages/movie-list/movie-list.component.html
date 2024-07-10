@@ -1,6 +1,12 @@
 <h2 class="content-block">Movie List</h2>
 <div class="content-block">
-    <dx-data-grid id="movieGrid" [dataSource]="movies" keyExpr="idPelicula">
-        
+    <dx-data-grid id="movieGrid" [dataSource]="movies" keyExpr="id" [allowColumnReordering]="true" [columnAutoWidth]="true">
+        <dxi-column dataField="titulo"></dxi-column>
+        <dxi-column dataField="estreno"></dxi-column>
+        <dxi-column dataField="valoracion"></dxi-column>
+        <dxi-column dataField="sinopsis" [width]="250"></dxi-column>
+        <dxi-column dataField="idDirector"></dxi-column>
+        <dxi-column dataField="idGenero"></dxi-column>
+        <dxi-column dataField="idGenero"></dxi-column>
     </dx-data-grid>    
 </div>
