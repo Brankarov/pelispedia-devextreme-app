@@ -15,11 +15,13 @@ export class MovieListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadMovies();
+    console.log("init");
   }
 
   loadMovies(): void {
     this.service.getMovies().subscribe((movies: Movie[]) => {
       this.movies = movies;
+      console.log(movies);
     },
       (error: any) => {
         console.error('Error fetching movies', error)
