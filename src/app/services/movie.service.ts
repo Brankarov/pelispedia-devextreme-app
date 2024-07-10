@@ -8,5 +8,11 @@ import { Movie } from '../models/Movie';
 })
 export class MovieService {
 
-  constructor() { }
+  private apiUrl = "https://localhost:7204/api/Peliculas";
+ 
+  constructor(private Http: HttpClient) {}
+
+  getMovies(): Observable<Movie[]>{
+    return this.Http.get<Movie[]>(this.apiUrl);
+  }
 }
