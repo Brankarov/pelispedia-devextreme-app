@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { NgModel } from '@angular/forms';
-import { NgClass } from '@angular/common';
 import { Movie } from '../../models/Movie';
-
+import { MovieService } from '../../services/movie.service';
+import { ActorService } from '../../services/actor.service';
+import { Actor } from '../../models/Actor';
+import { Casting } from '../../models/Casting';
 
 @Component({
   selector: 'app-movies',
@@ -13,39 +13,91 @@ import { Movie } from '../../models/Movie';
 export class MoviesComponent implements OnInit{
 
   movies: Movie[] = [];
-  selectedMovie: Movie | null = null;
-  newActor: string = '';
-  poster: string = 'public/poster.png';
+  actores: Actor [] = [];
+  movie: Movie | null = null;
+  currentMovieIndex: number = 0;
+
+  constructor(private movieService: MovieService, private actorService : ActorService) { }
 
   ngOnInit(): void {
-   this.movies =  [
-    {
-      id: 1,
-      titulo: 'Blade Runner',
-      sinopsis: 'Al final del siglo XX, miles de hombres y mujeres dejaron la tierra para conquistar el espacio y escapar de las grandes ciudades',
-      estreno: 1982,
-      valoracion: 0.2,
-      director: "rodert deniro",
-      genero: "noir",
-      actores: ['Harrison Ford']
-    }
-  ];
-  console.log(this.movies);
-    
+    this.loadMovies();
+    this.loadActores();
   }
-  constructor() {
-    this.movies =  [
-      {
-        id: 1,
-        titulo: 'Blade Runner',
-        sinopsis: 'Al final del siglo XX, miles de hombres y mujeres dejaron la tierra para conquistar el espacio y escapar de las grandes ciudades',
-        estreno: 1982,
-        valoracion: 0.2,
-        director: "rodert deniro",
-        genero: "noir",
-        actores: ['Harrison Ford']
+
+  loadMovies(): void {
+    this.movieService.getMoviesConActores().subscribe(
+      (data: Movie[]) => {
+        this.movies = data;
+        console.log(data);
+        if (this.movies.length > 0) {
+          console.log(this.movie);
+          this.movie = this.movies[this.currentMovieIndex];
+        }
+      },
+      (error: any) => {
+        console.error('Error fetching movies:', error);
       }
-    ];
-   }
+    );
+  }
+  loadActores(): void {
+    this.actorService.getActores().subscribe(
+      (data: Actor[]) => {
+        this.actores = data;
+        console.log(data);
+      },
+      (error: any) => {
+        console.error('Error fetching movies:', error);
+      }
+    );
+  }
+
+  nextMovie(): void {
+    if (this.currentMovieIndex < this.movies.length - 1) {
+      this.currentMovieIndex++;
+      this.updateCurrentMovie();
+    }
+  }
+
+  prevMovie(): void {
+    if (this.currentMovieIndex > 0) {
+      this.currentMovieIndex--;
+      this.updateCurrentMovie();
+    }
+  }
+
+  updateCurrentMovie(): void {
+    console.log(this.movie);
+    this.movie = this.movies[this.currentMovieIndex];
+  }
+
+  createActing(data: any): void {
+    console.log('Datos actualizados:', data);
+    const selectedActor = this.actores.find(actor => actor.Nombre === data.nombre);
+    const cleanData = JSON.parse(JSON.stringify(data.data));
+    console.log(cleanData);
+    const castingData = {
+      idPelicula: this.movie? this.movie.id : 0, 
+      idActor: selectedActor?.idActor || 0,
+    };  
+    console.log('Casting data:', castingData);
+    this.actorService.postCasting(castingData).subscribe(
+      (response: any) => {
+        console.log('Casting creado:', response);
+      },
+      (error: any) => {
+        console.error('Error al crear el casting:', error);
+      }
+    );
+  }
+
+  onActorSelected(event: any) {
+    const selectedActorNombre = event.value;
+    const selectedActor = this.actores.find(actor => actor.Nombre === selectedActorNombre);
+    console.log('Actor seleccionado:', selectedActor);
+    if (selectedActor) {
+      console.log('Actor seleccionado:', selectedActor);
+    }
+  }
+
 }
 

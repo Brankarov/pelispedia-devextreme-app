@@ -1,11 +1,32 @@
-<dx-form id="form" [formData]="movies">
-  <dxi-item itemType="group" cssClass="form-group" [colCount]="4">
-    <dxi-item>
-      <div class="form-avatar"></div>
+<div>
+  <dx-form id="form" [formData]="movie">
+    <dxi-item itemType="group" cssClass="form-group" [colCount]="4">
+      <dxi-item>
+        <div class="form-avatar"></div>
+      </dxi-item>
+      <dxi-item itemType="group" [colSpan]="3">
+        <dxi-item dataField="titulo" caption="Título"></dxi-item>
+        <dxi-item dataField="estreno" caption="Fecha Estreno"></dxi-item>
+        <dxi-item dataField="director.nombreDirector" caption="Director"></dxi-item>
+      </dxi-item>
     </dxi-item>
-    <dxi-item itemType="group" [colSpan]="3">
-      <dxi-item dataField="FirstName"></dxi-item>
-      <dxi-item dataField="LastName"></dxi-item>
-    </dxi-item>
-  </dxi-item>
-</dx-form>
+  </dx-form>
+  <dx-data-grid id="grid" [dataSource]="movie?.actores || []" [allowColumnReordering]="true" [columnAutoWidth]="true" (onRowInserting)="createActing($event)">
+    <dxi-column dataField="idActor" caption="ID" [visible]="false"></dxi-column>
+    <dxi-column dataField="nombre" caption="Nombre" calculateDisplayValue="nombre">
+      <dxo-lookup [dataSource]="actores" displayExpr="nombre" valueExpr="nombre" (onValueChanged)="onActorSelected($event)">
+      </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="raza" caption="Raza"></dxi-column>
+      <dxo-lookup [dataSource]="actores" displayExpr="raza" valueExpr="raza">
+      </dxo-lookup>
+    <dxi-column dataField="sexo" caption="Sexo"></dxi-column>
+      <!-- <dxo-lookup [dataSource]="actores" displayExpr="raza" valueExpr="raza"></dxo-lookup> -->
+    <dxo-editing mode="popup" [allowAdding]="true"></dxo-editing>
+    <dxo-editing mode="popup" [allowDeleting]="true"></dxo-editing>
+  </dx-data-grid>
+  <div class="pagination-buttons">
+    <button (click)="prevMovie()" [disabled]="currentMovieIndex === 0">Previous</button>
+    <button (click)="nextMovie()" [disabled]="currentMovieIndex === movies.length - 1">Next</button>
+  </div>
+</div>
