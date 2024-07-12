@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'; 
-
+import { FormsModule } from '@angular/forms';
+import { NgClass } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { SideNavOuterToolbarModule, SideNavInnerToolbarModule, SingleCardModule } from './layouts';
@@ -9,6 +10,8 @@ import { FooterModule, ResetPasswordFormModule, CreateAccountFormModule, ChangeP
 import { AuthService, ScreenService, AppInfoService } from './shared/services';
 import { UnauthenticatedContentModule } from './unauthenticated-content';
 import { AppRoutingModule } from './app-routing.module';
+import { DxButtonModule, DxDataGridModule, DxTabPanelComponent, DxTabPanelModule, DxTemplateModule, DxTreeListModule } from 'devextreme-angular';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +29,12 @@ import { AppRoutingModule } from './app-routing.module';
     LoginFormModule,
     UnauthenticatedContentModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    DxDataGridModule,
+    DxButtonModule,
+    DxTabPanelModule,
+    DxTreeListModule,
+    DxTemplateModule,
   ],
   providers: [
     AuthService,

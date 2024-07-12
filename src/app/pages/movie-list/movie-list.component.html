@@ -1,17 +1,27 @@
 <h2 class="content-block">Movie List</h2>
 <div class="content-block">
-    <dx-data-grid id="movieGrid" [dataSource]="movies" keyExpr="id" [allowColumnReordering]="true" [columnAutoWidth]="true">
+    <dx-data-grid id="movieGrid" [dataSource]="movies" keyExpr="id" [allowColumnReordering]="true" [columnAutoWidth]="true" (onRowInserting)="sendMovie($event)"
+        (onRowUpdated)="saveMovie($event)">
+        <dxi-column dataField="id"></dxi-column>
         <dxi-column dataField="titulo"></dxi-column>
         <dxi-column dataField="estreno"></dxi-column>
-        <dxi-column dataField="valoracion"></dxi-column>
+        <dxi-column dataField="valoracion" [editorOptions]="{ min: 0, max: 1, step: 0.01 }">
+            <dxi-validation-rule type="custom" [validationCallback]="validateValoracion" message="Valor debe estar entre 0 y 1"></dxi-validation-rule>
+          </dxi-column>
         <dxi-column dataField="sinopsis" [width]="250"></dxi-column>
-        <dxi-column dataField="idDirector"></dxi-column>
-        <dxi-column dataField="idGenero"></dxi-column>
-        <dxi-column [width]="100">
-            <ng-template dxTemplate="cell" let-data>
-                <dxi-button text="Editar" type="normal" stylingMode="contained" (onClick)="editMovie(data)"></dxi-button>
-            </ng-template>
+        <dxi-column dataField="genero" caption="genero" calculateDisplayValue="genero.nombreGenero">
+            <dxo-lookup [dataSource]="generos" displayExpr="nombreGenero" valueExpr="nombreGenero">
+            </dxo-lookup>
         </dxi-column>
-        <!-- <dxo-editing mode="popup" [allowUpdating]="true"></dxo-editing> -->
-    </dx-data-grid>    
+        <dxi-column dataField="director" caption="director" calculateDisplayValue="director.nombreDirector">
+            <dxo-lookup [dataSource]="directores" displayExpr="nombreDirector" valueExpr="nombreDirector">
+            </dxo-lookup>
+        </dxi-column>
+        <dxi-column type="button">
+            <dxi-button [onClick]="">boton</dxi-button>
+        </dxi-column>
+        <dxo-editing mode="popup" [allowAdding]="true"></dxo-editing>
+        <dxo-editing mode="form" [allowUpdating]="true"></dxo-editing>
+    </dx-data-grid> 
+     
 </div>

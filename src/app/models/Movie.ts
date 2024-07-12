@@ -4,6 +4,7 @@ export interface Movie {
     estreno: number;
     valoracion: number;
     sinopsis?: string;
-    idDirector: number;
-    idGenero: number;
+    director: {};
+    genero: {};
+    actores: string[];
   }
