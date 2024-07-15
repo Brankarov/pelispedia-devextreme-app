@@ -11,6 +11,7 @@ export class ActorService {
 
   private apiUrl = "https://localhost:7204/api/Director/GetActores";
   private sendApiUrl = "https://localhost:7204/api/Director/PostCasting";
+  private deletingUrl = "https://localhost:7204/api/Director/DeleteCasting"
 
   constructor(private Http: HttpClient) {}
 
@@ -20,5 +21,10 @@ export class ActorService {
 
   postCasting(castingData: Casting): Observable<Casting> {
     return this.Http.post<Casting>(this.sendApiUrl, castingData);
-  }  
+  }
+  
+  deleteCasting(idPelicula: number, idActor: number): Observable<void> {
+    const url = `${this.deletingUrl}?idPelicula=${idPelicula}&idActor=${idActor}`;
+    return this.Http.delete<void>(url);
+  }
 }

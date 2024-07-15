@@ -5,20 +5,6 @@ export const navigation = [
     icon: 'home'
   },
   {
-    text: 'Examples',
-    icon: 'folder',
-    items: [
-      {
-        text: 'Profile',
-        path: '/profile'
-      },
-      {
-        text: 'Tasks',
-        path: '/tasks'
-      }
-    ]
-  },
-  {
     text: 'Movies',
     icon: 'video',
     items:[
@@ -27,7 +13,7 @@ export const navigation = [
         path: '/pages/movie-list'
       },
       {
-        text: 'Movies',
+        text: 'Manejo de Actores',
         path: '/pages/movies'
       }
     ]

@@ -90,13 +90,22 @@ export class MoviesComponent implements OnInit{
     );
   }
 
-  onActorSelected(event: any) {
-    const selectedActorNombre = event.value;
-    const selectedActor = this.actores.find(actor => actor.Nombre === selectedActorNombre);
-    console.log('Actor seleccionado:', selectedActor);
-    if (selectedActor) {
-      console.log('Actor seleccionado:', selectedActor);
-    }
+  deletingCasting(data: any):void {
+    const selectedActor = this.actores.find(actor => actor.Nombre === data.nombre);
+    const cleanData = JSON.parse(JSON.stringify(data.data));
+    const castingData = {
+      idPelicula: this.movie? this.movie.id : 0, 
+      idActor: selectedActor?.idActor || 0,
+    };
+    console.log(castingData);
+    this.actorService.deleteCasting( castingData.idPelicula,castingData.idActor).subscribe(
+      (response: any) => {
+        console.log('Casting creado:', response);
+      },
+      (error: any) => {
+        console.error('Error al crear el casting:', error);
+      }
+    ) ; 
   }
 
 }

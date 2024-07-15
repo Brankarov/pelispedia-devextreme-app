@@ -11,18 +11,13 @@
       </dxi-item>
     </dxi-item>
   </dx-form>
-  <dx-data-grid id="grid" [dataSource]="movie?.actores || []" [allowColumnReordering]="true" [columnAutoWidth]="true" (onRowInserting)="createActing($event)">
-    <dxi-column dataField="idActor" caption="ID" [visible]="false"></dxi-column>
+  <dx-data-grid id="grid" [dataSource]="movie?.actores || []" [allowColumnReordering]="true" [columnAutoWidth]="true" (onRowInserting)="createActing($event)" (onRowRemoved)="deletingCasting($event)">
+    <dxi-column dataField="idActor" caption="ID" [visible]="false" [editorOptions]="{ readOnly : true}"></dxi-column>
     <dxi-column dataField="nombre" caption="Nombre" calculateDisplayValue="nombre">
-      <dxo-lookup [dataSource]="actores" displayExpr="nombre" valueExpr="nombre" (onValueChanged)="onActorSelected($event)">
+      <dxo-lookup [dataSource]="actores" displayExpr="nombre" valueExpr="nombre">
       </dxo-lookup>
     </dxi-column>
-    <dxi-column dataField="raza" caption="Raza"></dxi-column>
-      <dxo-lookup [dataSource]="actores" displayExpr="raza" valueExpr="raza">
-      </dxo-lookup>
-    <dxi-column dataField="sexo" caption="Sexo"></dxi-column>
-      <!-- <dxo-lookup [dataSource]="actores" displayExpr="raza" valueExpr="raza"></dxo-lookup> -->
-    <dxo-editing mode="popup" [allowAdding]="true"></dxo-editing>
+    <dxo-editing mode="row" [allowAdding]="true"></dxo-editing>
     <dxo-editing mode="popup" [allowDeleting]="true"></dxo-editing>
   </dx-data-grid>
   <div class="pagination-buttons">
