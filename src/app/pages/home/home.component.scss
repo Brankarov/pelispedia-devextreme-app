@@ -1,34 +1,22 @@
-.logos-container {
-  margin: 20px 0 40px 0;
+.movie-report {
+  margin: 20px;
+}
+
+.movie-report h2 {
   text-align: center;
-  svg {
-    display: inline-block;
-  }
 }
 
-.devextreme-logo {
-  width: 200px;
-  height: 34px;
-  margin-bottom: 13px;
+.movie-report table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.angular-logo {
-  width: 220px;
-  height: 62px;
+.movie-report th, .movie-report td {
+  border: 1px solid #ddd;
+  padding: 8px;
 }
 
-.plus {
-  margin: 15px 10px;
-  width: 22px;
-  height: 22px;
-}
-
-:host-context(.screen-x-small) .logos-container {
-  svg {
-    width: 100%;
-    display: block;
-    &.plus {
-      margin: 0;
-    }
-  }
+.movie-report th {
+  background-color: #f2f2f2;
+  text-align: left;
 }
