@@ -22,7 +22,24 @@ export class MovieService {
   }
 
   updateMovie(movieData: any): Observable<any> {
-    return this.Http.put<any>(this.sendUrl, movieData); 
+    const payload = {
+      id: movieData.id,
+      titulo: movieData.titulo,
+      estreno: movieData.estreno,
+      valoracion: movieData.valoracion,
+      sinopsis: movieData.sinopsis,
+      director: {
+        idDirector: movieData.director.idDirector || 0,
+        nombreDirector: movieData.director,
+      },
+      genero: {
+        idGenero: movieData.genero.idGenero || 0,
+        nombreGenero: movieData.genero,
+      },
+      actores: movieData.actores || []
+    };
+    console.log(" se envia", payload);
+    return this.Http.put<any>(this.sendUrl, payload); 
   }
 
   createMovie(movieData : any): Observable<any>{

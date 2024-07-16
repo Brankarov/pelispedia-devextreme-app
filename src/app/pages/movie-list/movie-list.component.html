@@ -2,7 +2,7 @@
 <div class="content-block">
     <dx-data-grid id="movieGrid" [dataSource]="movies" keyExpr="id" [allowColumnReordering]="true" [columnAutoWidth]="true" (onRowInserting)="sendMovie($event)"
         (onRowUpdated)="saveMovie($event)">
-        <dxi-column dataField="id" [editorOptions]="{ readOnly : true}"></dxi-column>
+        <!-- <dxi-column dataField="id" [editorOptions]="{ readOnly : true}"></dxi-column> -->
         <dxi-column dataField="titulo"></dxi-column>
         <dxi-column dataField="estreno"></dxi-column>
         <dxi-column dataField="valoracion" [editorOptions]="{ min: 0, max: 1, step: 0.01 }">

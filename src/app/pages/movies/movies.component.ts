@@ -4,6 +4,7 @@ import { MovieService } from '../../services/movie.service';
 import { ActorService } from '../../services/actor.service';
 import { Actor } from '../../models/Actor';
 import { Casting } from '../../models/Casting';
+import {Casting_Front } from '../../models/Casting copy';
 
 @Component({
   selector: 'app-movies',
@@ -72,14 +73,26 @@ export class MoviesComponent implements OnInit{
 
   createActing(data: any): void {
     console.log('Datos actualizados:', data);
-    const selectedActor = this.actores.find(actor => actor.Nombre === data.nombre);
-    const cleanData = JSON.parse(JSON.stringify(data.data));
-    console.log(cleanData);
-    const castingData = {
-      idPelicula: this.movie? this.movie.id : 0, 
-      idActor: selectedActor?.idActor || 0,
-    };  
+  
+    // Verifica que data.data.nombre esté definido correctamente
+    const actorName = data.data && data.data.nombre ? data.data.nombre : '';
+  
+    // Busca el actor en this.actores usando el nombre obtenido
+    const selectedActor = this.actores.find(actor => actor.Nombre === actorName);
+    console.log("Actor seleccionado:", selectedActor);
+  
+    // Verifica que data.data esté definido y luego haz una copia limpia de los datos si es necesario
+    const cleanData = data.data ? JSON.parse(JSON.stringify(data.data)) : null;
+    console.log('Datos limpios:', cleanData);
+  
+    // Crea el objeto castingData con la estructura de Casting_Front
+    const castingData: Casting_Front = {
+      idPelicula: this.movie ? this.movie.id : 0,
+      Actor: actorName,
+    };
     console.log('Casting data:', castingData);
+  
+    // Llama al servicio para enviar los datos de casting
     this.actorService.postCasting(castingData).subscribe(
       (response: any) => {
         console.log('Casting creado:', response);

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Actor } from '../models/Actor';
 import { Casting } from '../models/Casting';
+import { Casting_Front } from '../models/Casting copy';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +20,8 @@ export class ActorService {
     return this.Http.get<Actor[]>(this.apiUrl);
   }
 
-  postCasting(castingData: Casting): Observable<Casting> {
-    return this.Http.post<Casting>(this.sendApiUrl, castingData);
+  postCasting(castingData: Casting_Front): Observable<Casting_Front> {
+    return this.Http.post<Casting_Front>(this.sendApiUrl, castingData);
   }
   
   deleteCasting(idPelicula: number, idActor: number): Observable<void> {

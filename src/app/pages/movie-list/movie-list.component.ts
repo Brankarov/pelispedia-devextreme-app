@@ -61,7 +61,7 @@ export class MovieListComponent implements OnInit {
   saveMovie(updatedData: any): void {
     console.log('Datos actualizados:', updatedData);
     const cleanData = JSON.parse(JSON.stringify(updatedData.data));
-    console.log(cleanData);
+    console.log("model",cleanData);
     this.service.updateMovie(cleanData).subscribe(
       (response: any) => {
         console.log('Película actualizada:', response);
